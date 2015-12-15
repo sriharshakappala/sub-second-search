@@ -1,3 +1,5 @@
+require 'find'
+
 class SearchBot
 
   def initialize(query)
@@ -8,9 +10,8 @@ class SearchBot
 
   def search_in_code_base
     @sub_directories_to_search_through.each do |sub_directory|
-      binding.pry
       _directory_path = @redis_code_base_path + sub_directory
-
+      Find.find(_directory_path.to_s) { |e| puts e if File.directory?(e) }
     end
   end
 
